@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "throughline": {
+      "type": "http",
+      "url": "http://localhost:8765/mcp/",
+      "headers": {
+        "X-Throughline-Actor": "agent",
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  }
+}

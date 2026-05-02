@@ -1,0 +1,21 @@
+.venv/
+_spike/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# throughline runtime state (the project's own dogfood instance)
+.throughline/
+
+# Auto-rendered by the render worker — the DB is the source of truth.
+.docs/state.md
+.docs/active-context.md
+.docs/execution-log.md
+
+# IDE
+.idea/
+.vscode/

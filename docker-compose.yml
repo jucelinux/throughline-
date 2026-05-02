@@ -1,0 +1,24 @@
+services:
+  throughline:
+    build: .
+    image: throughline:local
+    container_name: throughline
+    ports:
+      - "8765:8765"
+    environment:
+      THROUGHLINE_HOST: "0.0.0.0"
+      THROUGHLINE_PORT: "8765"
+      THROUGHLINE_DB_PATH: "/app/.throughline/state.db"
+      THROUGHLINE_DOCS_DIR: "/app/.docs"
+    volumes:
+      # Bind-mount the FULL .throughline directory so SQLite WAL siblings persist.
+      # Do not bind-mount state.db alone — -wal and -shm must live next to it.
+      - ./.throughline:/app/.throughline
+      - ./.docs:/app/.docs
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8765/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
